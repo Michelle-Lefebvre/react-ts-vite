@@ -5,8 +5,11 @@ import { AiTwotoneHeart } from "react-icons/ai";
 interface Props {
   onClick: () => void;
 }
+let countLikes = 0;
+
 function Like({ onClick }: Props) {
   const [like, setLike] = useState(false);
+  countLikes++;
 
   const toggle = () => {
     setLike(!like);
@@ -20,6 +23,7 @@ function Like({ onClick }: Props) {
       ) : (
         <AiTwotoneHeart color="deeppink" size={80} onClick={toggle} />
       )}
+      <span>{countLikes}</span>
     </>
   );
 }

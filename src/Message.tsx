@@ -1,14 +1,22 @@
 interface MessageProp {
   msg: string;
 }
+
+let count = 0;
+
 function Message({ msg }: MessageProp) {
-  let count = 0;
+  console.log("Message called", count);
   count++;
+
   const name = "Michelle";
+
   if (name)
     return (
       <>
-        <h1> Message {count}</h1>
+        <h1>
+          {" "}
+          Message: {name} {msg} {count}
+        </h1>
       </>
     );
 

@@ -11,6 +11,16 @@ function App() {
   let clicked = 0;
   const [isApproved, setApproved] = useState(true);
 
+  //object updating
+  const [drink, setDrink] = useState({
+    title: "Americano",
+    price: 5,
+  });
+
+  const handleDrinkClick = () => {
+    setDrink({ ...drink, price: 6 });
+  };
+
   const handleSelectItem = (item: string) => {
     clicked++;
     console.log(item);
@@ -19,17 +29,17 @@ function App() {
   return (
     <div className="App">
       <Message msg="first" />
-      <Message msg="super fly" />
-      <Message msg="startrek" />
+      {/* <Message msg="super fly" />
+      <Message msg="startrek" /> */}
       <ListGroup
         heading="Cities"
         items={items}
         onSelectItem={handleSelectItem}
       />
       <Alert children="Hello World" />
-      <FaBeer color="blue" size={80} />
+      <FaBeer onClick={handleDrinkClick} color="brown" size={80} />
+      <span>${drink.price}</span>
       <Like onClick={() => console.log("clicked")} />
-      <span>{clicked}</span>
     </div>
   );
 }
