@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import "./App.css";
 import Message from "./Message";
 import ListGroup from "./components/ListGroup";
@@ -6,6 +6,8 @@ import Alert from "./components/Alert";
 import { FaBeer } from "react-icons/fa";
 import { AiFillBug } from "react-icons/ai";
 import Like from "./components/Like";
+import NavBar from "./components/NavBar";
+import Cart from "./components/Cart";
 
 function App() {
   let items = ["New York", "Toronto", "Seattle", "Vancouver", "Montreal"];
@@ -15,6 +17,9 @@ function App() {
     clicked++;
     console.log(item);
   };
+
+  // updating state between Components
+  const [cartItems, setCartItems] = useState(["Product1", "Product2"]);
 
   //object updating
   const [drink, setDrink] = useState({
@@ -66,10 +71,12 @@ function App() {
         <ul>
           <li onClick={handleBugClick} key={bug.id}>
             {bug.id}
-            <AiFillBug />
+            <AiFillBug size={36} />
           </li>
         </ul>
       ))}
+      <NavBar cartItemsCount={cartItems.length} />
+      <Cart cartItems={cartItems} onClear={() => setCartItems([])} />
     </div>
   );
 }
