@@ -1,8 +1,13 @@
-import React from "react";
+import React, { FormEvent } from "react";
+import { FaHandHolding } from "react-icons/fa";
 
 const Form = () => {
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    console.log("Submitted");
+  };
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="name" className="form-label">
           Name
@@ -15,7 +20,7 @@ const Form = () => {
         </label>
         <input id="age" type="number" className="form-control" />
       </div>
-      <button className="btn btn-pirmary" type="submit">
+      <button className="btn btn-primary" type="submit">
         Submit
       </button>
     </form>

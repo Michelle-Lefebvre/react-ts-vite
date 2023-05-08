@@ -17,7 +17,7 @@ function App() {
   const [isApproved, setApproved] = useState(true);
   const handleSelectItem = (item: string) => {
     clicked++;
-    console.log(item);
+    // console.log(item);
   };
   // updating state in object w/ array
   const [cart, setCart] = useState({
@@ -35,7 +35,7 @@ function App() {
         item.id === 1 ? { ...item, quantity: item.quantity++ } : item
       ),
     });
-    console.log("cart", cart);
+    // console.log("cart", cart);
     return `<h1>${cart}</h1>`;
   };
 
@@ -44,12 +44,12 @@ function App() {
     name: "Spicy Pepperoni",
     toppings: ["Mushrooms"],
   });
-  console.log("pizza1", pizza);
+  // console.log("pizza1", pizza);
 
   const handlePizzaChange = () => {
     setPizza({ ...pizza, toppings: [...pizza.toppings, "pepperoni"] });
   };
-  console.log("pizza2", pizza);
+  // console.log("pizza2", pizza);
 
   // exercise Updating State
   const [game, setGame] = useState({
@@ -59,11 +59,11 @@ function App() {
       age: 5,
     },
   });
-  console.log("game1", game);
+  // console.log("game1", game);
 
   const handleGameClick = () => {
     setGame({ ...game, player: { ...game.player, name: "Michelle" } });
-    console.log("game2");
+    // console.log("game2");
     return `<h1>${game}</h1>`;
   };
 
