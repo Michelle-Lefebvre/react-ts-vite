@@ -8,6 +8,8 @@ import { AiFillBug } from "react-icons/ai";
 import Like from "./components/Like";
 import NavBar from "./components/NavBar";
 import Cart from "./components/Cart";
+import ExpandableText from "./components/ExpandableText";
+import Form from "./components/Form";
 
 function App() {
   let items = ["New York", "Toronto", "Seattle", "Vancouver", "Montreal"];
@@ -16,6 +18,53 @@ function App() {
   const handleSelectItem = (item: string) => {
     clicked++;
     console.log(item);
+  };
+  // updating state in object w/ array
+  const [cart, setCart] = useState({
+    discount: 0.1,
+    items: [
+      { id: 1, title: "Item 1", quantity: 1 },
+      { id: 2, title: "Item 2", quantity: 1 },
+    ],
+  });
+
+  const handleCartChange = () => {
+    setCart({
+      ...cart,
+      items: cart.items.map((item) =>
+        item.id === 1 ? { ...item, quantity: item.quantity++ } : item
+      ),
+    });
+    console.log("cart", cart);
+    return `<h1>${cart}</h1>`;
+  };
+
+  // exercise Updating state in array
+  const [pizza, setPizza] = useState({
+    name: "Spicy Pepperoni",
+    toppings: ["Mushrooms"],
+  });
+  console.log("pizza1", pizza);
+
+  const handlePizzaChange = () => {
+    setPizza({ ...pizza, toppings: [...pizza.toppings, "pepperoni"] });
+  };
+  console.log("pizza2", pizza);
+
+  // exercise Updating State
+  const [game, setGame] = useState({
+    id: 1,
+    player: {
+      name: "John",
+      age: 5,
+    },
+  });
+  console.log("game1", game);
+
+  const handleGameClick = () => {
+    setGame({ ...game, player: { ...game.player, name: "Michelle" } });
+    console.log("game2");
+    return `<h1>${game}</h1>`;
   };
 
   // updating state between Components
@@ -55,6 +104,7 @@ function App() {
 
   return (
     <div className="App">
+      <Form />
       <Message msg="first" />
       {/* <Message msg="super fly" />
       <Message msg="startrek" /> */}
@@ -77,6 +127,17 @@ function App() {
       ))}
       <NavBar cartItemsCount={cartItems.length} />
       <Cart cartItems={cartItems} onClear={() => setCartItems([])} />
+
+      <button onClick={handleGameClick}>Player Change</button>
+      <button onClick={handlePizzaChange}>Pizza</button>
+      <button onClick={handleCartChange}>Cart</button>
+
+      <ExpandableText maxChars={10}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat,
+        veritatis necessitatibus in ipsum fugit, repudiandae beatae nostrum
+        quasi deleniti ipsam blanditiis magnam earum ad accusamus voluptatum
+        numquam eaque quas. Accusantium.
+      </ExpandableText>
     </div>
   );
 }
