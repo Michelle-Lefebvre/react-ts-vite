@@ -1,38 +1,23 @@
 import React, { FormEvent, useRef, useState } from "react";
-import { FaHandHolding } from "react-icons/fa";
+import { FieldValues, useForm } from "react-hook-form";
+
+/** install react hook form
+ * npm i react-hook-form@7.43
+ * import { useForm } from "react-hook-form";
+ */
 
 const Form = () => {
-  const [person, setPerson] = useState({
-    name: "",
-    age: "",
-  });
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    console.log(person);
-  };
-  /** 
-  const nameRef = useRef<HTMLInputElement>(null);
-  const ageRef = useRef<HTMLInputElement>(null);
-  const person = { name: "", age: 0 };
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data: FieldValues) => console.log(data);
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    if (nameRef.current !== null) person.name = nameRef.current.value;
-    if (ageRef.current !== null) person.age = parseInt(ageRef.current.value);
-    console.log(person);
-  };
-  */
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
         <label htmlFor="name" className="form-label">
           Name
         </label>
         <input
-          onChange={(event) =>
-            setPerson({ ...person, name: event.target.value })
-          }
-          value={person.name} // single source of truth makes this a controled component
+          {...register("name")}
           id="name"
           type="text"
           className="form-control"
@@ -46,10 +31,7 @@ const Form = () => {
           id="age"
           type="number"
           className="form-control"
-          onChange={(event) =>
-            setPerson({ ...person, age: parseInt(event.target.value) })
-          }
-          value={person.age}
+          {...register("age")}
         />
       </div>
       <button className="btn btn-primary" type="submit">
